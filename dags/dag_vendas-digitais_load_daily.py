@@ -21,7 +21,7 @@
 
 import os, json
 from airflow import DAG
-from airflow import log
+import logging
 import google.oauth2.id_token
 from google.cloud import bigquery
 from airflow.models import Variable
@@ -67,10 +67,10 @@ default_args = {
     "owner": "Gerencia: BI & Analytics, Coord: Front",
     'start_date': datetime(2022, 9, 12),
     'depends_on_past': False,
-    'on_failure_callback': log,
-    'on_success_callback': log,
-    'on_retry_callback': log,
-    'sla_miss_callback': log,
+    'on_failure_callback': logging,
+    'on_success_callback': logging,
+    'on_retry_callback': logging,
+    'sla_miss_callback': logging,
     'retries': RETRIES,
     'retry_delay': timedelta(minutes=RETRY_DELAY),
     'dagrun_timeout': timedelta(minutes=DAG_TIMEOUT)
