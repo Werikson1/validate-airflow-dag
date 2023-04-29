@@ -30,6 +30,10 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - name: Initialize Airflow Database
+        run: |
+          airflow db init
+
       - name: Import Airflow variables
         run: |
           for json_file in variables/*.json; do
@@ -38,5 +42,4 @@ jobs:
 
       - name: Run Airflow DAG validation
         run: |
-          airflow db init
           find ./dags -name "*.py" -exec python {} \; -exec echo -n "Exit code: $?; " \; | grep -q "Exit code: 0;" || exit 1
