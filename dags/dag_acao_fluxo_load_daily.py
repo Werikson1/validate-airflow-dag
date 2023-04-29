@@ -19,7 +19,6 @@ from airflow import DAG
 from datetime import timedelta, datetime
 from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator
 from airflow.operators.python import PythonOperator,BranchPythonOperator
-from libs.airflow import log_and_slack, log
 from airflow.models import Variable
 
 # Coleta variaveis do Airflow
@@ -37,10 +36,6 @@ VAR_PRJ_SENSITIVE_REFINED = env_var["VAR_PRJ_SENSITIVE_REFINED"]
 
 default_args = {
     "owner": "Gerencia: Front, Coord: Front 1",
-    "on_failure_callback": log,
-    "on_success_callback": log,
-    "on_retry_callback": log,
-    "sla_miss_callback": log,
     'start_date': airflow.utils.dates.days_ago(1),
     'retries': 1,
     'retry_delay': timedelta(minutes=5)
