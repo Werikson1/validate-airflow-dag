@@ -9,7 +9,7 @@ on:
       - main  # Substitua pelo nome da sua branch principal, se necessário
 
 jobs:
-  build:
+  validade-DAG:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,6 +27,7 @@ jobs:
         pip install apache-airflow
 
     - name: Run Airflow DAG validation
-      run: |
-        airflow db init
-        find ./dags -name "*.py" -exec python {} \;
+  run: |
+    airflow db init
+    find ./dags -name "*.py" -exec python {} \; -exec echo -n "Exit code: $?; " \; | grep -q "Exit code: 0;" || exit 1
+
