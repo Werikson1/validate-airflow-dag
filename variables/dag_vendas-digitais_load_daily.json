@@ -1,0 +1,40 @@
+{
+  "dag_vendas-digitais_load_daily":{
+    "schedule_interval": "0 13 * * *",
+    "retries": 3,
+    "retry_delay": 5,
+    "dag_timeout": 60,
+    "var_prj_raw": null,
+    "var_prj_raw_custom": null,
+    "var_prj_trusted": "trusted-zone",
+    "var_prj_refined": "refined-zone",
+    "var_prj_sensitive_raw": null,
+    "var_prj_sensitive_trusted": "sensitive-trusted",
+    "var_prj_sensitive_refined": "sensitive-refined" ,
+    "http_conn_id_function": "http_conn_function_prd",
+    "endpoint_function": "fnc-tableau-send-repor-slack-loja-digital",
+    "gcf_url": "https://us-central1-data-tools-production.cloudfunctions.net/fnc-tableau-send-repor-slack-loja-digital",
+    "report_tableau_slack_args": [
+      {
+        "report": "c4fe8d32-277f-42e3-86e3-5a90029c70ca",
+        "reportList": "30b1ce97-4a7c-48fd-9938-90d04781844a, c6676312-58cc-42b0-9e1b-f7845d8877ec",
+        "channelId": "C024J3U84GG",
+        "reportName": "Semanal Vendas Digitais",
+        "slackMessage": ":bar_chart:  * [Relatório Semanal Vendas Digitais - WhatsApp] :: {hoje}*",
+        "project_log_table": "data-architect-282615"
+      }
+    ],
+    "report_tableau_slack_args1": [
+      {
+        "report": "c4fe8d32-277f-42e3-86e3-5a90029c70ca",
+        "reportList": "30b1ce97-4a7c-48fd-9938-90d04781844a, c6676312-58cc-42b0-9e1b-f7845d8877ec",
+        "channelId": "C022YAVQ1CG",
+        "reportName": "Semanal Vendas Digitais",
+        "slackMessage": ":bar_chart:  * [Relatório Semanal Vendas Digitais - WhatsApp] :: {hoje}* ",
+        "project_log_table": "data-architect-282615"
+      }
+    ]
+  
+  }
+
+}
