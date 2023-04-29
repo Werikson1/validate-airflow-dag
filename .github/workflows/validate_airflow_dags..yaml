@@ -13,24 +13,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8  # Use a versão do Python compatível com a sua instalação do Airflow
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8  # Use a versão do Python compatível com a sua instalação do Airflow
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install apache-airflow
+      - name: Import Airflow variables
+        run: |
+          for json_file in variables/*.json; do
+            airflow variables import "$json_file"
+          done
 
-    - name: Install project dependencies
-      run: |
-        pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install apache-airflow
 
-    - name: Run Airflow DAG validation
-      run: |
-        airflow db init
-        find ./dags -name "*.py" -exec python {} \; -exec echo -n "Exit code: $?; " \; | grep -q "Exit code: 0;" || exit 1
+      - name: Install project dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Airflow DAG validation
+        run: |
+          airflow db init
+          find ./dags -name "*.py" -exec python {} \; -exec echo -n "Exit code: $?; " \; | grep -q "Exit code: 0;" || exit 1
