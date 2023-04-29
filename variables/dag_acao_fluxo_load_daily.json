@@ -1,0 +1,11 @@
+{
+	"dag_acao_fluxo_load_daily": {
+		"VAR_PRJ_RAW": "raw-zone-005", 
+		"VAR_PRJ_TRUSTED": "trusted-zone",
+		"VAR_PRJ_SENSITIVE_RAW": "sensitive-raw",
+		"VAR_PRJ_SENSITIVE_TRUSTED": "sensitive-trusted" ,
+		"VAR_PRJ_REFINED" : "refined-zone" ,
+		"VAR_PRJ_SENSITIVE_REFINED" : "sensitive-refined" ,
+		"SCHEDULE_INTERVAL": "0 10 * * *"  
+     }
+}
