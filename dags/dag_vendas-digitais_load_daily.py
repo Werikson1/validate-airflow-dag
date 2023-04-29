@@ -4,7 +4,7 @@
 # Projeto.......: LOJA DIGITAL
 # Descricao.....: DAG de execução de carga diária de vendas digitais
 # Departamento..: Engenharia de Dados e Arquitetura
-# Autor.........: Bianca Schastai
+# Autor.........: werikson
 # Repositório GitHub: https://github.com/grupoboticario/data-platform-airflow
 # ===========================================================================================
 
