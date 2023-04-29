@@ -26,6 +26,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install apache-airflow
 
+    - name: Install project dependencies
+      run: |
+        pip install -r requirements.txt
+
     - name: Run Airflow DAG validation
       run: |
         airflow db init
