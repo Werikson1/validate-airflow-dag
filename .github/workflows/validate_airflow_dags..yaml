@@ -32,7 +32,6 @@ jobs:
 
       - name: Import Airflow variables
         run: |
-          . .venv/bin/activate
           for json_file in variables/*.json; do
             airflow variables import "$json_file"
           done
