@@ -21,7 +21,7 @@
 
 import os, json
 from airflow import DAG
-from libs.airflow import log
+from airflow import log
 import google.oauth2.id_token
 from google.cloud import bigquery
 from airflow.models import Variable
