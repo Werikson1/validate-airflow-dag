@@ -41,7 +41,8 @@ from airflow.operators.python_operator import ShortCircuitOperator
 # ===========================================================================================
 
 # Coleta variaveis do Airflow
-env_var = Variable.get("dag_vendas-digitais_load_daily", deserialize_json=True)
+env_var = Variable.get("dag_vendas-digitais_load_daily", deserialize_json=True, default_var={})
+
 
 # Variaveis de Projeto
 SCHEDULE_INTERVAL           = env_var["schedule_interval"]
