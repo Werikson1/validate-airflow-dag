@@ -3,10 +3,10 @@ name: Validate Airflow DAGs
 on:
   push:
     branches:
-      - main  # Substitua pelo nome da sua branch principal, se necessário
+      - main
   pull_request:
     branches:
-      - main  # Substitua pelo nome da sua branch principal, se necessário
+      - main
 
 jobs:
   DAG_validador:
@@ -19,13 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8  # Use a versão do Python compatível com a sua instalação do Airflow
-
-      - name: Import Airflow variables
-        run: |
-          for json_file in variables/*.json; do
-            airflow variables import "$json_file"
-          done
+          python-version: 3.8
 
       - name: Install dependencies
         run: |
@@ -35,6 +29,13 @@ jobs:
       - name: Install project dependencies
         run: |
           pip install -r requirements.txt
+
+      - name: Import Airflow variables
+        run: |
+          . .venv/bin/activate
+          for json_file in variables/*.json; do
+            airflow variables import "$json_file"
+          done
 
       - name: Run Airflow DAG validation
         run: |
