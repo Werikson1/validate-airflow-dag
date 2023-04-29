@@ -1,5 +1,5 @@
 name: Validate Airflow DAGs
-on:
+'on':
   push:
     branches:
       - main
@@ -13,6 +13,7 @@ on:
 jobs:
   DAG_validador:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -22,24 +23,25 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Install dependencies
+      - name: Instalando Dependencias 
         run: |
           python -m pip install --upgrade pip
           pip install apache-airflow
 
-      - name: Install project dependencies
+      - name: Instalando Dependencias do Projeto
         run: |
           pip install -r requirements.txt
 
-      - name: Import Airflow variables
+      - name: Inicializar o Airflow Database
+        run: |
+          airflow db init
+
+      - name: Deploy das Variaveis do Airflow 
         run: |
           for json_file in variables/*.json; do
             airflow variables import "$json_file"
           done
-          
-      - name: Run Airflow DAG validation
-        run: >
-          airflow db init
 
-          find ./dags -name "*.py" -exec python {} \; -exec echo -n "Exit code:
-          $?; " \; | grep -q "Exit code: 0;" || exit 1
+      - name: Run Airflow DAG validation
+        run: |
+          find ./dags -name "*.py" -exec python {} \; -exec echo -n "Exit code: $?; " \; | grep -q "Exit code: 0;" || exit 1
