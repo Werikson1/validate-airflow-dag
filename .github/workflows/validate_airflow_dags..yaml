@@ -28,6 +28,5 @@ jobs:
 
     - name: Run Airflow DAG validation
       run: |
-      airflow db init
-      find ./dags -name "*.py" -exec python {} \; -exec echo -n "Exit code: $?; " \; | grep -q "Exit code: 0;" || exit 1
-
+        airflow db init
+        find ./dags -name "*.py" -exec python {} \; -exec echo -n "Exit code: $?; " \; | grep -q "Exit code: 0;" || exit 1
