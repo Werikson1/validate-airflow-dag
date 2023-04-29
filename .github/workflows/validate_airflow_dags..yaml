@@ -9,7 +9,7 @@ on:
       - main  # Substitua pelo nome da sua branch principal, se necessário
 
 jobs:
-  build:
+  DAG_validador:
     runs-on: ubuntu-latest
 
     steps:
