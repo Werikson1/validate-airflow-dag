@@ -1,0 +1,32 @@
+name: Validate Airflow DAGs
+
+on:
+  push:
+    branches:
+      - main  # Substitua pelo nome da sua branch principal, se necessário
+  pull_request:
+    branches:
+      - main  # Substitua pelo nome da sua branch principal, se necessário
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8  # Use a versão do Python compatível com a sua instalação do Airflow
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install apache-airflow
+
+    - name: Run Airflow DAG validation
+      run: |
+        airflow db init
+        find ./dags -name "*.py" -exec python {} \;
